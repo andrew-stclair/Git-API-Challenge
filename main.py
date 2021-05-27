@@ -12,16 +12,14 @@ git = git.Repo('.').git
 repoHash = git.rev_parse("HEAD", short=True)
 repoTag = git.describe(tags=True)
 repoName = os.path.basename(git.rev_parse(show_toplevel=True))
+
 class WebServer(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == "/health":
             self.send_response(200)
-            self.send_header("Content-type", "text/html")
+            self.send_header("Content-type", "text/json")
             self.end_headers()
-            self.wfile.write(bytes("<html><head><title>Health</title></head>", "utf-8"))
-            self.wfile.write(bytes("<p>Repo Hash: %s</p>" % repoHash, "utf-8"))
-            self.wfile.write(bytes("<p>Repo Name: %s</p>" % repoName, "utf-8"))
-            self.wfile.write(bytes("<p>Repo Version: %s</p>" % repoTag, "utf-8"))
+            self.wfile.write(bytes("{\"hash\": \"%s\", \"name\": \"%s\", \"version\": \"%s\"}" % (repoHash, repoName, repoTag), "utf-8"))
         else:
             self.send_response(404)
 
