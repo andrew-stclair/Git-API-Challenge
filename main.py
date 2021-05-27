@@ -1,11 +1,9 @@
 # Python 3 server example
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import git
-import time
 import os
-import json
 
-hostName = "localhost"
+hostName = "0.0.0.0"
 serverPort = 80
 
 git = git.Repo('.').git
