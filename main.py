@@ -12,7 +12,6 @@ git = git.Repo('.').git
 repoHash = git.rev_parse("HEAD", short=True)
 repoTag = git.describe(tags=True)
 repoName = os.path.basename(git.rev_parse(show_toplevel=True))
-
 class WebServer(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == "/health":
