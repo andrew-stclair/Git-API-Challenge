@@ -14,6 +14,11 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v2
+        with:
+          clean: 'false'
+      - 
+        name: Print directory
+        run: ls -la
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
